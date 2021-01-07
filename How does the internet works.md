@@ -68,23 +68,23 @@ Giống như nhiều dự án kỹ thuật phức tạp khác, Internet được
 
 Những ứng dụng internet làm việc tại Application Layer và không cần quan tâm về chi tiết của những tầng bên dưới như thến nào. Ví dụ, những kết nối của một ứng dụng đến ứng dụng khác trên mạng thông qua TCP sử dụng một kiến trúc gọi là socket, thứ sẽ tóm gọn lại những chi tiết phức tạp của những routing packet(gói định tuyến) và tập hợp các packet lại thành những message.
 
-## Công việc của những lớp trên là gì?
+### Công việc của những lớp trên là gì?
 
 Ở lớp thấp nhất là Link Layer, lớp này là "Physical layer"(lớp vật lý) của internet. Link Layer liên quan đến việc truyền tải các bit dữ liệu qua một số phương tiện vật lý thông thường như cáp quang hoặc là tín hiệu vô tuyến wifi. 
 Bên trên của Link Layer là Internet Layer. Internet Layer liên quan đến việc định tuyến những packet đến được với đích của nó. Internet Protocol được đề cập bên trên nằm trong lớp này (Do đó có cùng tên). Internet Protocol tự động điều chỉnh và định tuyến lại các packet dựa trên tải hoặc ngắt mạng. Lưu ý rằng nó không đảm bảo rằng tất cả các packet luôn luôn được đưa đến đích, nó chỉ cố gắng làm tốt nhất có thể.
 Bên trên của Internet Layer là Transport Layer. LỚp này là để bù đắp cho thực tế rằng dữ liệu có thể bị mất trên Internet và trên Link Layer bên dưới. Transport Control Protocol được nhắc đến ở trên nằm trên lớp này, và công việc chủ yếu của nó là lắp ráp lại những packet thành những message nguyên bản và gửi lại những packet bị mất.
 Application Layer ở bên trên cùng. Lớp này sữ dụng tất cả những lớp bên dưới để xử lý những chi tiết phức tạp của việc di chuyển các packet trên Internet. Nó cho phép các ứng dụng có thể dễ dàng tạo ra được kết nối với csac ứng dụng khác trên Internet với những abstraction đơn giản như socket. Giao thức HTTP (Hypertext Transfer Protocol) chỉ định cách các trình duyệt web và các web server sẽ tương tác trong Application Layer. Giao thức IMAP (Internet message access protocol) chỉ định bằng cách nào các ứng dụng email có thể truy suất email tồn tại trong Application Layer. Giao thức FTP(File Transfer Protocol) chỉ định giao thức truyền tải tập tin giữa máy khách tải tệp tin và máy chủ lưu trữ tệp tin tồn tại trong Application Layer.
 
-## Máy khách so với máy chủ là gì (What's a client versus a server) ?
+### Máy khách so với máy chủ là gì (What's a client versus a server) ?
 
 Mặc dù máy khách và máy chủ đều là những ứng dụng giao tiếp thông qua Internet, tuy nhiên máy khách thì "gần người dùng hơn(closer to the user)" là những ứng dụng hướng tới người dùng nhiều hơn như là trình duyệt web, ứng dụng email, hoặc ứng dụng di động. Máy chủ là những ứng dụng chạy trên những máy tính điều khiển từ xa mà máy khách sẽ giao tiếp thông qua Internet khi cần. 
 Định nghĩa chính thức hơn thì ứng dụng khởi tạo một kết nối TCP là máy khách. Ứng dụng nhận kết nối TCP là máy chủ. 
 
-## Làm cách nào những thông tin nhạy cảm như thông tin thẻ tín dụng được bảo mật khi được truyển tải qua Internet?
+### Làm cách nào những thông tin nhạy cảm như thông tin thẻ tín dụng được bảo mật khi được truyển tải qua Internet?
 
 Trong những ngày đầu của Internet, nó đã đủ để đảm bảo rằng các bộ định tuyến mạng và liên kết mạng ở các vị trí an toàn về mặt vật lý. Nhưng khi Internet phát triển, càng nhiều router tức là càng nhiều điểm dễ bị khai thác hơn. Hơn nữa, với sự ra đời của công nghệ không dây như WiFi, hacker có có thể chặn các gói tin trên đường đi của chúng, nó khiến cho việc đảm bảo an toàn ở những thiết bị phần cứng vật lý là không đủ. Giải pháp là mã hóa và xác thực thông qua SSL/TLS
 
-## SSL/TLS là gì?
+### SSL/TLS là gì?
 
 SSL là viết tắt của Secured Sockets Layer. TLS là viết tắt của Transport Layer Security. SSL ban đầu được phát triển bởi Netscape vào năm 1994 nhưng sau đấy phiên bản bảo mật hơn được đưa ra và được đổi tên thành TLS. Chúng tôi sẽ giới thiệu chúng cùng nhau là SSL/TLS. 
 SSL/TLS là một lớp được lựa chọn nằm ở giữa Transport Layer và Application Layer. Nó cho phép bảo mật những thông tin nhạy cảm được giao tiếp qua Internet bằng cách mã hóa và xác thực. 
@@ -95,7 +95,7 @@ Chúng ta có thể thấy SSL khi chúng ta truy cập những trang web đã �
 
 medium.com là một máy chủ web đã kích hoạt SSL. Trình duyệt có thể kết nối đến nó thông qua https để chắc chắn rằng thông tin giao tiếp đã được mã hóa. Trình duyệt cũng chắc chắn rằng nó đang giao tiếp với máy chủ medium.com thực sự, và không có một cuộc tấn công man-in-the-middle nào.
 
-## Làm cách nào để SSL xác thực định danh của một máy chủ và mã hóa thông tin liên lạc của họ?
+### Làm cách nào để SSL xác thực định danh của một máy chủ và mã hóa thông tin liên lạc của họ?
 
 Nó sử dụng mã hóa bất đối xứng và xác thực SSL. 
 Mã hóa bất đối xứng là một thuật toán mã hóa sử dụng một public key và một private key. Về cơ bản những key này chỉ là một chuối số bắt nguồn từ những số nguyên tố lớn. Private key thì được sử dụng để giải mã dữ liệu và chữ kí của tài liệu. Public key được sử dụng để mã hóa dữ liệu và xác thực chữ ký tài liệu. Khác với mã hóa đối xứng, mã hóa bất đối xứng có khả năng mã hóa nhưng không không tự động có khả năng giải mã. Nó thực hiện điều này bởi sử dụng nguyên lý của một nhánh toán học được gọi là lý thuyết số(number theory). 
@@ -106,11 +106,11 @@ Khi một máy khách(client) yêu cầu một kết nối đã được mã hó
 - Có phải nó vẫn chưa bị hết hạn?
 Client sử dụng public key của SSL certificate để mã hõa một khóa bí mật tạm thời được sinh ra ngẫu nhiên và gửi chúng đến server. Bởi vì server có một private key trương ứng, nên nó có thể giải mã khóa bí mật của client. Khi này cả client và server đều có mã bí mật tạm thời, vì vậy chúng đều có thể sử dụng nó để mã hóa đối từng message chúng gửi cho nhau sau đó. Chúng sẽ xóa bỏ khóa bí mật tạm thời này sau khi phiên làm việc hết hạn.
 
-## Điều gì sẽ xảy ra khi tin tặc(hacker) chặn được một phiên làm việc đã được mã hóa SSL?
+### Điều gì sẽ xảy ra khi tin tặc(hacker) chặn được một phiên làm việc đã được mã hóa SSL?
 
 Giả sử hacker chặn được tất cả mọi message được gửi giữa client và server. Hacker thấy được chứng chỉ SSL mà server gửi, cũng như là khóa bí mật đã được mã hóa của client. Nhưng bởi vì hacker không có private key, nó không thể giải mã bất kì một tin nhắn nào giữa client và server. 
 
-## Tóm tắt
+### Tóm tắt
 Internet được khởi đầu với cái tên ARPNET từ những năm 1960 với mục tiêu là một mạng lưới máy tính phi tập chung. Về mặt vật lý, Internet là một tập hợp những máy tính di chuyển từng bit dữ liệu cho nhau thông qua dây dẫn, dây cáp, và tín hiệu vô tuyến. 
 Giống với nhiều dự án kỹ thuật phức tạp khác, Internet chia nhỏ thành những lớp khác nhau, từng phần này chỉ xử lý những nhiệm vụ nhỏ hơn. Những lớp này giao tiếp với nhau thông qua những giao diện đã được xác định rõ ràng(well-defined interfaces).
 Có nhiều giao thức xác định nên cách thức làm việc của Internet và những ứng dụng của nó sẽ hoạt động ở các lớp khác nhau: HTTP, IMAP, SSH, TCP, UDP, IP, ... Theo nghĩa này, Internet là một tập hợp những nguyên tắc cho các máy tính và chương trình sẽ hoạt động như là một mạng máy tính vật lý.
